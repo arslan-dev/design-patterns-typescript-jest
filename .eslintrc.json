@@ -23,6 +23,8 @@
     "jest"
   ],
   "ignorePatterns": [
-    "/dist/*"
+    "/dist/*",
+    "/jest.config.js",
+    "/babel.config.js"
   ]
 }
