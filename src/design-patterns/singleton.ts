@@ -13,7 +13,7 @@ class Database {
     return Database._instance
   }
 
-  query(sql) {
+  query(sql: string) {
     console.log(`Querying '${sql}' in ${this._dbType} database;`)
   }
 }

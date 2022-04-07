@@ -1,4 +1,4 @@
-import { Database } from '../design-patterns/singleton'
+import { Database } from '../src/design-patterns/singleton'
 
 test('Database has only one instance', () => {
   const instanceA = Database.getInstance()
@@ -7,8 +7,4 @@ test('Database has only one instance', () => {
   const instanceB = Database.getInstance()
   expect(instanceB).toBeInstanceOf(Database)
   expect(instanceB).toEqual(instanceA)
-})
-
-test('Database\'s constructor does not work', () => {
-  const error = new Database()
 })
