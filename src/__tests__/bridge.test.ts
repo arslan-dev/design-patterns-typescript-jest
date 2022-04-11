@@ -1,10 +1,6 @@
 import { TV, RemoteControl, Radio, AdvancedRemoteControl } from "../design-patterns/bridge"
 
-let tv: TV
-let remote: RemoteControl
 
-let radio: Radio
-let advancedRemote: AdvancedRemoteControl
 
 // TV Channel Names:
 //   0: "Channel 1"
@@ -15,6 +11,9 @@ let advancedRemote: AdvancedRemoteControl
 //   1: "Radio wave 2"
 
 describe("Case of an ordinary Remote when the TV is on", () => {
+
+  let tv: TV
+  let remote: RemoteControl
 
   beforeEach(() => {
     tv = new TV()
@@ -62,6 +61,9 @@ describe("Case of an ordinary Remote when the TV is on", () => {
 
 describe("Case of an ordinary Remote when the TV is off", () => {
 
+  let tv: TV
+  let remote: RemoteControl
+
   beforeEach(() => {
     tv = new TV()
     remote = new RemoteControl(tv)
@@ -99,6 +101,9 @@ describe("Case of an ordinary Remote when the TV is off", () => {
 
 
 describe("Case of an Advanced Remote when the Radio is on", () => {
+
+  let radio: Radio
+  let advancedRemote: AdvancedRemoteControl
 
   beforeEach(() => {
     radio = new Radio()
@@ -162,6 +167,9 @@ describe("Case of an Advanced Remote when the Radio is on", () => {
 
 
 describe("Case of an Advanced Remote when the Radio is off", () => {
+
+  let radio: Radio
+  let advancedRemote: AdvancedRemoteControl
 
   beforeEach(() => {
     radio = new Radio()

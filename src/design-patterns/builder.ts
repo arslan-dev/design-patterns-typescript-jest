@@ -1,91 +1,165 @@
-class Car {
-  private _seats: string;
-  private _engine: string;
-  private _tripComputer: string;
-  private _gps: string;
-
-  setSeats(seatCount: number) { this._seats = `Install ${seatCount} seats` }
-  setEngine(engineName: string) { this._engine = `Install ${engineName}` }
-  setTripComputer(hasTripComputer: boolean) { this._tripComputer = hasTripComputer ? 'Install computer' : '' }
-  setGPS(hasGPS: boolean) { this._gps = hasGPS ? 'Install GPS' : '' }
+export enum EEngineType {
+  FrontEngine   = "Front Engine",
+  RearMidEngine = "Rear Mid Engine"
 }
 
-class Manual {
-  private _seats: string;
-  private _engine: string;
-  private _tripComputer: string;
-  private _gps: string;
+export class Car {
+  private _numberOfSeats?: number
+  private _engineType?: EEngineType
+  private _hasTripComputer?: boolean
+  private _hasGPS?: boolean
 
-  setSeats(seatCount: number) { this._seats = `Your car model has ${seatCount} seats` }
-  setEngine(engineName: string) { this._engine = `The manual for the ${engineName}` }
-  setTripComputer(hasTripComputer: boolean) { this._tripComputer = hasTripComputer ? 'The manual for the Trip Computer' : '' }
-  setGPS(hasGPS: boolean) { this._gps = hasGPS ? 'The manual for the onboard GPS' : '' }
+  setSeats(numberOfSeats: number)           { this._numberOfSeats = numberOfSeats }
+  setEngine(engineType: EEngineType)        { this._engineType = engineType }
+  setTripComputer(hasTripComputer: boolean) { this._hasTripComputer = hasTripComputer }
+  setGPS(hasGPS: boolean)                   { this._hasGPS = hasGPS }
+
+  getNumberOfSeats(): number {
+    if (this._numberOfSeats) {
+      return this._numberOfSeats
+    } else {
+      throw "The Car object has not yet been initialized"
+    }
+  }
+
+  getInstalledEngineType(): EEngineType {
+    if (this._engineType) {
+      return this._engineType
+    } else {
+      throw "The Car object has not yet been initialized"
+    }
+  }
+
+  hasTripComputer(): boolean {
+    if (this._hasTripComputer !== undefined) {
+      return this._hasTripComputer
+    } else {
+      throw "The Car object has not yet been initialized"
+    }
+  }
+
+  hasGPS(): boolean {
+    if (this._hasGPS !== undefined) {
+      return this._hasGPS
+    } else {
+      throw "The Car object has not yet been initialized"
+    }
+  }
+}
+
+export class Manual {
+  private _numberOfSeats?: number
+  private _engineType?: EEngineType
+  private _hasTripComputer?: boolean
+  private _hasGPS?: boolean
+
+  setSeats(numberOfSeats: number)           { this._numberOfSeats = numberOfSeats }
+  setEngine(engineType: EEngineType)        { this._engineType = engineType }
+  setTripComputer(hasTripComputer: boolean) { this._hasTripComputer = hasTripComputer }
+  setGPS(hasGPS: boolean)                   { this._hasGPS = hasGPS }
+
+  getSeatInformation(): string {
+    if (this._numberOfSeats) {
+      return `Installed seats: ${this._numberOfSeats}`
+    } else {
+      throw "The Manual object has not yet been initialized"
+    }
+  }
+
+  getEngineInformation(): string {
+    if (this._engineType) {
+      return `Installed engine: ${this._engineType}`
+    } else {
+      throw "The Manual object has not yet been initialized"
+    }
+  }
+
+  getTripComputerManual(): string {
+    if (this._hasTripComputer !== undefined) {
+      if (this._hasTripComputer) {
+        return "Trip Computer manual"
+      } else {
+        return "No Trip Computer installed"
+      }
+    } else {
+      throw "The Manual object has not yet been initialized"
+    }
+  }
+
+  getGPSManual(): string {
+    if (this._hasGPS !== undefined) {
+      if (this._hasGPS) {
+        return "GPS manual"
+      } else {
+        return "No GPS installed"
+      }
+    } else {
+      throw "The Manual object has not yet been initialized"
+    }
+  }
 }
 
 interface Builder {
   reset: () => void
 
-  setSeats(count: number)
-  setEngine(engineName: string)
-  setTripComputer(hasComputer: boolean)
-  setGps(hasGps: boolean)
+  setSeats(numberOfSeats: number): void
+  setEngine(engineType: EEngineType): void
+  setTripComputer(hasTripComputer: boolean): void
+  setGps(hasGps: boolean): void
 }
 
-class CarBuilder implements Builder {
-  private _car: Car;
+export class CarBuilder implements Builder {
+  private _car!: Car
 
   constructor () {
     this.reset()
   }
 
   reset() {
-    this._car = new Car();
+    this._car = new Car()
   }
 
-  setSeats(count: number) { this._car.setSeats(count) }
-  setEngine(engineName: string) { this._car.setEngine(engineName) }
-  setTripComputer(hasComputer: boolean) { this._car.setTripComputer(hasComputer) }
-  setGps(hasGps: boolean) { this._car.setGPS(hasGps) }
+  setSeats(numberOfSeats: number)           { this._car.setSeats(numberOfSeats) }
+  setEngine(engineType: EEngineType)        { this._car.setEngine(engineType) }
+  setTripComputer(hasTripComputer: boolean) { this._car.setTripComputer(hasTripComputer) }
+  setGps(hasGps: boolean)                   { this._car.setGPS(hasGps) }
 
   getProduct(): Car {
-    const product = this._car;
-    this.reset();
-    return product;
+    const product = this._car
+    this.reset()
+    return product
   }
 }
 
-class CarManualBuilder implements Builder {
-  private _manual: Manual;
+export class CarManualBuilder implements Builder {
+  private _manual!: Manual
 
   constructor () {
     this.reset()
   }
 
   reset() {
-    this._manual = new Manual();
+    this._manual = new Manual()
   }
 
-  setSeats(count: number) { this._manual.setSeats(count) }
-  setEngine(engineName: string) { this._manual.setEngine(engineName) }
-  setTripComputer(hasComputer: boolean) { this._manual.setTripComputer(hasComputer) }
-  setGps(hasGps: boolean) { this._manual.setGPS(hasGps) }
+  setSeats(numberOfSeats: number)           { this._manual.setSeats(numberOfSeats) }
+  setEngine(engineType: EEngineType)        { this._manual.setEngine(engineType) }
+  setTripComputer(hasTripComputer: boolean) { this._manual.setTripComputer(hasTripComputer) }
+  setGps(hasGps: boolean)                   { this._manual.setGPS(hasGps) }
 
   getProduct(): Manual {
-    const product = this._manual;
-    this.reset();
-    return product;
+    const product = this._manual
+    this.reset()
+    return product
   }
 }
 
-class Director {
-  private _builder: Builder;
-
-  setBuilder(v: Builder) { this._builder = v }
+export class Director {
 
   constructSportsCar(builder: Builder) {
     builder.reset()
     builder.setSeats(2)
-    builder.setEngine('Sport Engine')
+    builder.setEngine(EEngineType.RearMidEngine)
     builder.setTripComputer(true)
     builder.setGps(true)
   }
@@ -93,35 +167,8 @@ class Director {
   constructSUV(builder: Builder) {
     builder.reset()
     builder.setSeats(4)
-    builder.setEngine('Common Engine')
+    builder.setEngine(EEngineType.FrontEngine)
     builder.setTripComputer(false)
     builder.setGps(false)
   }
 }
-
-const carBuilder = new CarBuilder();
-const carManualBuilder = new CarManualBuilder();
-
-const director = new Director();
-
-// SPORTS CAR
-
-director.constructSportsCar(carBuilder);
-const sportsCar = carBuilder.getProduct();
-
-director.constructSportsCar(carManualBuilder);
-const sportsCarManual = carManualBuilder.getProduct();
-
-console.log(sportsCar);
-console.log(sportsCarManual);
-
-// SUV
-
-director.constructSUV(carBuilder);
-const suv = carBuilder.getProduct();
-
-director.constructSUV(carManualBuilder);
-const suvManual = carManualBuilder.getProduct();
-
-console.log(suv);
-console.log(suvManual);
