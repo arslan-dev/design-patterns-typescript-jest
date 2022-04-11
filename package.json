@@ -2,14 +2,9 @@
   "name": "jest-playground",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
-  "type": "module",
   "scripts": {
     "test": "jest",
-    "lint": "eslint . --ext .ts",
-    "start:build": "tsc -w",
-    "start:run": "nodemon build/app.js",
-    "start": "concurrently npm:start:*"
+    "lint": "eslint . --ext .ts"
   },
   "author": "",
   "license": "ISC",

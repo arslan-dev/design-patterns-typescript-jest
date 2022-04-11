@@ -1,4 +1,4 @@
-import { Database } from './design-patterns/singleton.js'
+import { Database } from './design-patterns/singleton'
 
 const foo = Database.getInstance()
 foo.query('select *')

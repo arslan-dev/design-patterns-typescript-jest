@@ -2,6 +2,10 @@ class Database {
   private static _instance: Database
   private _dbType: string
 
+  get engine(): string {
+    return this._dbType
+  }
+
   private constructor() {
     this._dbType = 'MYSQL'
   }
