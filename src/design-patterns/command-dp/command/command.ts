@@ -4,6 +4,8 @@ export interface IControllableApplication {
   get clipboard(): string
   set clipboard(v: string)
 
+  get activeEditor(): IControllableEditor | null
+
   undo(): void
 }
 
@@ -11,7 +13,7 @@ export interface IControllableEditor {
   get text(): string
   set text(v: string)
 
-  get selection(): string
+  getSelection(start: number, end: number): string
   deleteSelection(): void
   replaceSelection(v: string): void
 }

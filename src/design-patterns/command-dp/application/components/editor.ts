@@ -11,9 +11,8 @@ export default class Editor implements IControllableEditor {
     this._text = ""
   }
 
-  get selection(): string {
-    // TODO: maybe not
-    return this.text.substring(0, 3)
+  getSelection(start: number, end: number): string {
+    return this.text.substring(start, end)
   }
 
   deleteSelection(): void {

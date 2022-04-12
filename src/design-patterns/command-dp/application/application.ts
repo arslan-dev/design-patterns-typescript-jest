@@ -4,7 +4,7 @@
 // APPLICATION SERVICES
 
 import ACommand, { IControllableApplication, IControllableEditor } from "../command/command"
-import { ShortcutManager } from "./components/shorcut-manager"
+import { ShortcutManager } from "./components/shortcut-manager"
 
 export interface ICommandHistory {
   push(command: ACommand): void
@@ -17,10 +17,8 @@ export interface IButton {
 }
 
 type TButtonList = IButton[]
-// export type TShortcutMap = Map<string, ACommand>
-export type TShortcutMap = {
-  [key: string]: ACommand;
-};
+type TEditorList = IControllableEditor[]
+export type TShortcutMap = Map<string, ACommand>
 
 export interface IShortcutManager {
   get shortcutMap(): TShortcutMap
@@ -33,7 +31,10 @@ export interface IApplication {
   get buttons(): TButtonList
 
   addShortcut(key: string, command: ACommand): void
-  get shortcuts(): TShortcutList
+  get shortcuts(): TShortcutMap
+
+  addEditor(editor: IControllableEditor): void
+  get editors(): TEditorList
 }
 
 export default class Application implements IControllableApplication, IApplication {
@@ -41,11 +42,10 @@ export default class Application implements IControllableApplication, IApplicati
   private _buttons: TButtonList
   private _shortcutManager: IShortcutManager
 
-  editors: IControllableEditor[]
-  activeEditor?: IControllableEditor
-  private _commandHistory: ICommandHistory
+  private _editors: TEditorList
+  private _activeEditor?: IControllableEditor
 
-  // SETTERS GETTERS
+  private _commandHistory: ICommandHistory
 
   get clipboard(): string {
     if (this._clipboard) {
@@ -56,7 +56,7 @@ export default class Application implements IControllableApplication, IApplicati
   set clipboard(v: string) { this._clipboard = v }
 
   constructor(commandHistory: ICommandHistory) {
-    this.editors = []
+    this._editors = []
     this._buttons = []
     this._shortcutManager = new ShortcutManager
 
@@ -75,39 +75,25 @@ export default class Application implements IControllableApplication, IApplicati
     this._shortcutManager.onKeyPress(key, command)    
   }
 
-  get shortcuts(): TShortcutList {
-    return this._shortcutManager 
+  get shortcuts(): TShortcutMap {
+    return this._shortcutManager.shortcutMap 
   }
 
-  // createUI() {
-  //   const copyCommand = new CopyCommand(this, this.activeEditor)
-  //   const copy = () => this.executeCommand(copyCommand)
+  addEditor(editor: IControllableEditor): void {
+    this._editors.push(editor)
+  }
 
-  //   const cutCommand = new CutCommand(this, this.activeEditor)
-  //   const cut = () => this.executeCommand(cutCommand)
+  get editors(): TEditorList {
+    return this._editors  
+  }
 
-  //   const pasteCommand = new PasteCommand(this, this.activeEditor)
-  //   const paste = () => this.executeCommand(pasteCommand)
-
-  //   const undoCommand = new UndoCommand(this, this.activeEditor)
-  //   const undo = () => this.executeCommand(undoCommand)
-
-  //   // EXECUTION
-
-  //   copy()
-  //   console.log('')
-  //   cut()
-  //   console.log('')
-  //   paste()
-  //   console.log('')
-  //   undo()
-  // }
-
-  // executeCommand(command: Command) {
-  //   if (command.execute()) {
-  //     this._history.push(command)
-  //   }
-  // }
+  get activeEditor(): IControllableEditor | null {
+    if (this._activeEditor) {
+      return this._activeEditor
+    } else {
+      return null
+    }
+  }
 
   undo() {
     const command = this._commandHistory.pop()

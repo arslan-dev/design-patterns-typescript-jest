@@ -4,7 +4,7 @@ import Command from "./command"
 
 export class CopyCommand extends Command {
   execute(): boolean {
-    this._app.clipboard = this._editor.selection
+    this._app.clipboard = this._editor.getSelection
     return false
   }
 }
@@ -12,7 +12,7 @@ export class CopyCommand extends Command {
 export class CutCommand extends Command {
   execute(): boolean {
     this.saveBackup()
-    this._app.clipboard = this._editor.selection
+    this._app.clipboard = this._editor.getSelection
     this._editor.deleteSelection()
     return true
   }

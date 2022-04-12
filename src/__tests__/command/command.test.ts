@@ -41,3 +41,33 @@ test("Test copy command", () => {
   // expect( sportsCarManual.getTripComputerManual() ).toEqual("Trip Computer manual")
   // expect( sportsCarManual.getGPSManual() ).toEqual("GPS manual")
 })
+
+  // createUI() {
+  //   const copyCommand = new CopyCommand(this, this.activeEditor)
+  //   const copy = () => this.executeCommand(copyCommand)
+
+  //   const cutCommand = new CutCommand(this, this.activeEditor)
+  //   const cut = () => this.executeCommand(cutCommand)
+
+  //   const pasteCommand = new PasteCommand(this, this.activeEditor)
+  //   const paste = () => this.executeCommand(pasteCommand)
+
+  //   const undoCommand = new UndoCommand(this, this.activeEditor)
+  //   const undo = () => this.executeCommand(undoCommand)
+
+  //   // EXECUTION
+
+  //   copy()
+  //   console.log('')
+  //   cut()
+  //   console.log('')
+  //   paste()
+  //   console.log('')
+  //   undo()
+  // }
+
+  // executeCommand(command: Command) {
+  //   if (command.execute()) {
+  //     this._history.push(command)
+  //   }
+  // }

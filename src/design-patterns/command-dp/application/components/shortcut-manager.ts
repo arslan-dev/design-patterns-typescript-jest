@@ -4,19 +4,22 @@ import { IShortcutManager, TShortcutMap } from "../application"
 import ACommand from "../../command/command"
 
 export class ShortcutManager implements IShortcutManager {
-  protected _list: TShortcutMap
-  get shortcutMap(): TShortcutMap { return this._list }
+  protected _map: TShortcutMap
+  get shortcutMap(): TShortcutMap { return this._map }
 
   constructor() {
-    this._list = {}
+    this._map = new Map
   }
 
   onKeyPress(key: string, command: ACommand) {
-    this._list[key] = command
+    this._map.set(key, command)
   }
 
   pressKey(key: string): void {
-    this._list[key].execute()
+    const command = this._map.get(key)
+    if (command) {
+      command.execute()
+    }
   }
 
 }

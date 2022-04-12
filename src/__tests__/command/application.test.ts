@@ -7,10 +7,10 @@ import Application from "../../design-patterns/command-dp/application/applicatio
 import Editor from "../../design-patterns/command-dp/application/components/editor"
 import CommandHistory from "../../design-patterns/command-dp/application/components/command-history"
 
-let commandHistory = new CommandHistory
-let application = new Application(commandHistory)
-let editor = new Editor
-let copyCommand = new CopyCommand(application, editor)
+let commandHistory: CommandHistory
+let application: Application
+let editor: Editor
+let copyCommand: CopyCommand
 
 beforeEach(() => {
   commandHistory = new CommandHistory
@@ -19,7 +19,7 @@ beforeEach(() => {
   copyCommand = new CopyCommand(application, editor)
 })
 
-test("Create some buttons", () => {
+it("should be possible to create new buttons in the application", () => {
   const button1 = new Button(copyCommand)
   application.addButton(button1)
 
@@ -31,7 +31,20 @@ test("Create some buttons", () => {
   expect(application.buttons.length).toEqual(2)
 })
 
-test("Create some shortcuts", () => {
+it("should be possible to add shortcuts", () => {
   application.addShortcut("Ctrl+C", copyCommand)
-  expect(application.shortcuts.length).toEqual(1)
+  expect(application.shortcuts.size).toEqual(1)
+
+  application.addShortcut("Ctrl+Ins", copyCommand)
+  expect(application.shortcuts.size).toEqual(2)
+})
+
+it("should be possible to open new Editors in the Application", () => {
+  const editor1 = new Editor
+  application.addEditor(editor1)
+  expect(application.editors.length).toEqual(1)
+
+  const editor2 = new Editor
+  application.addEditor(editor2)
+  expect(application.editors.length).toEqual(2)
 })
