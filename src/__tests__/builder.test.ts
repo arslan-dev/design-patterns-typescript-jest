@@ -1,20 +1,5 @@
 import { CarBuilder, CarManualBuilder, Director, EEngineType, Car, Manual } from "../design-patterns/builder"
 
-
-// // SPORTS CAR
-
-
-// // SUV
-
-// director.constructSUV(carBuilder);
-// const suv = carBuilder.getProduct();
-
-// director.constructSUV(carManualBuilder);
-// const suvManual = carManualBuilder.getProduct();
-
-// console.log(suv);
-// console.log(suvManual);
-
 let carBuilder: CarBuilder
 let carManualBuilder: CarManualBuilder
 let director: Director
