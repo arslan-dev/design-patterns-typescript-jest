@@ -11,8 +11,8 @@ export default class Editor implements IControllableEditor {
     this._text = ""
   }
 
-  getSelection(start: number, end: number): string {
-    return this.text.substring(start, end)
+  getSelection(): string {
+    return this.text.substring(0, 3)
   }
 
   deleteSelection(): void {
@@ -22,6 +22,6 @@ export default class Editor implements IControllableEditor {
   replaceSelection(text: string) {
     const substr = this.text.substring(0, 3)
     const regexp = new RegExp(substr)
-    this._text = this._text.replace(substr, text)
+    this._text = this._text.replace(regexp, text)
   }
 }

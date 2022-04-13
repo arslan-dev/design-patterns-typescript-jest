@@ -13,7 +13,7 @@ export interface IControllableEditor {
   get text(): string
   set text(v: string)
 
-  getSelection(start: number, end: number): string
+  getSelection(): string
   deleteSelection(): void
   replaceSelection(v: string): void
 }
