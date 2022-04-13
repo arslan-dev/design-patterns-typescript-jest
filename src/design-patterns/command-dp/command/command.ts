@@ -1,5 +1,7 @@
 // command.ts
 
+import ICloneable from "../i-cloneable"
+
 export interface IControllableApplication {
   get clipboard(): string
   set clipboard(v: string)
@@ -18,25 +20,37 @@ export interface IControllableEditor {
   replaceSelection(v: string): void
 }
 
-export default abstract class ACommand {
-  protected _app: IControllableApplication
-  protected _editor: IControllableEditor
-  protected _backup: string
+type TBackup = {
+  editor: IControllableEditor,
+  text: string
+}
 
-  constructor(app: IControllableApplication, editor: IControllableEditor) {
+export default abstract class ACommand implements ICloneable<ACommand> {
+  protected _app: IControllableApplication
+  protected _backup?: TBackup
+
+  constructor(app: IControllableApplication) {
     this._app = app
-    this._editor = editor
-    this._backup = ""
   }
 
   saveBackup() {
-    console.log("save backup")
-    this._backup = this._editor.text
+    if (this._app.activeEditor) {
+      this._backup = {
+        editor: this._app.activeEditor,
+        text: this._app.activeEditor.text
+      }
+    }
   }
 
   undo() {
-    console.log(`undo backup ${this._backup}`)
-    this._editor.text = this._backup
+    if (this._backup) {
+      this._backup.editor.text = this._backup.text
+    }
+  }
+
+  historicalCopy() {
+    const copy = Object.assign({}, this)
+    copy._backup
   }
 
   abstract execute(): boolean

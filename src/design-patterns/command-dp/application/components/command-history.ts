@@ -12,8 +12,8 @@ export default class CommandHistory implements ICommandHistory {
 
   // ICommandHistory interface implementation
 
-  push(c: ACommand) {
-    this._history.push(c)
+  push(command: ACommand) {
+    this._history.push(command)
   }
 
   pop(): ACommand | undefined {

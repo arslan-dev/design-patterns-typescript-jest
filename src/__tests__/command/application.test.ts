@@ -9,14 +9,12 @@ import CommandHistory from "../../design-patterns/command-dp/application/compone
 
 let commandHistory: CommandHistory
 let application: Application
-let editor: Editor
 let copyCommand: CopyCommand
 
 beforeEach(() => {
   commandHistory = new CommandHistory
   application = new Application(commandHistory)
-  editor = new Editor
-  copyCommand = new CopyCommand(application, editor)
+  copyCommand = new CopyCommand(application)
 })
 
 it("should be possible to create new buttons in the application", () => {

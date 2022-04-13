@@ -36,6 +36,8 @@ export interface IApplication {
   addEditor(editor: IControllableEditor): void
   get editors(): TEditorList
   setActiveEditor(editor: IControllableEditor): void
+
+  executeCommand(command: ACommand): void
 }
 
 export default class Application implements IControllableApplication, IApplication {
@@ -50,7 +52,7 @@ export default class Application implements IControllableApplication, IApplicati
 
   get clipboard(): string {
     if (this._clipboard) {
-      return this.clipboard
+      return this._clipboard
     }
     return ""
   }
@@ -100,6 +102,12 @@ export default class Application implements IControllableApplication, IApplicati
   setActiveEditor(editor: IControllableEditor): void {
     if (this._editors.includes(editor)) {
       this._activeEditor = editor
+    }
+  }
+
+  executeCommand(command: ACommand): void {
+    if (command.execute()) {
+      this._commandHistory.push(command)
     }
   }
 

@@ -3,49 +3,112 @@
 
 import Application from "../../design-patterns/command-dp/application/application"
 import CommandHistory from "../../design-patterns/command-dp/application/components/command-history"
-import Button from "../../design-patterns/command-dp/application/components/button"
-import { CopyCommand } from "../../design-patterns/command-dp/command/concrete-commands"
+import { CopyCommand, CutCommand, PasteCommand, UndoCommand } from "../../design-patterns/command-dp/command/concrete-commands"
+import Editor from "../../design-patterns/command-dp/application/components/editor"
 
 
 // TEST STARTS
 
-// let application: Application
+let app: Application
+let editor1: Editor
+let editor2: Editor
 // let copyButton: Button
 // let cutButton: Button
 // let pasteButton: Button
 // let undoButton: Button
 // let shortcuts: Shortcuts
 
-// beforeEach(() => {
+beforeEach(() => {
 
-//   const commandHistory = new CommandHistory()
-//   application = new Application(commandHistory)
+  const commandHistory = new CommandHistory()
+  app = new Application(commandHistory)
 
-//   const copyCommand = new CopyCommand(application)
-//   copyButton = new Button()
-//   cutButton = new Button
-//   pasteButton = new Button
-//   undoButton = new Button
-//   shortcuts = new Shortcuts
-// })
+  editor1 = new Editor()
+  editor1.text = "First Editor's text"
+  app.addEditor(editor1)
 
-test("Test copy command", () => {
-  // const copyCommand = new CopyCommand()
-  // copyButton.setCommand
+  editor2 = new Editor()
+  editor2.text = "Second Editor's text"
+  app.addEditor(editor2)
 
-  // director.constructSportsCar(carBuilder)
-  // const sportsCar = carBuilder.getProduct()
-  // expect( sportsCar.getNumberOfSeats() ).toEqual( 2 )
-  // expect( sportsCar.getInstalledEngineType() ).toEqual( EEngineType.RearMidEngine )
-  // expect( sportsCar.hasTripComputer() ).toEqual( true )
-  // expect( sportsCar.hasGPS() ).toEqual( true )
+  app.setActiveEditor(editor1)
 
-  // director.constructSportsCar(carManualBuilder)
-  // const sportsCarManual = carManualBuilder.getProduct()
-  // expect( sportsCarManual.getSeatInformation() ).toEqual("Installed seats: 2")
-  // expect( sportsCarManual.getEngineInformation() ).toEqual("Installed engine: Rear Mid Engine")
-  // expect( sportsCarManual.getTripComputerManual() ).toEqual("Trip Computer manual")
-  // expect( sportsCarManual.getGPSManual() ).toEqual("GPS manual")
+  // copyButton = new Button()
+  // cutButton = new Button
+  // pasteButton = new Button
+  // undoButton = new Button
+  // shortcuts = new Shortcuts
+})
+
+test("the copy command", () => {
+  const copyCommand = new CopyCommand(app)
+  app.executeCommand(copyCommand)
+
+  expect(app.activeEditor.text).toEqual("First Editor's text")
+  expect(app.clipboard).toEqual("Fir") 
+})
+
+test("the cut command", () => {
+  const cutCommand = new CutCommand(app)
+  app.executeCommand(cutCommand)
+
+  expect(app.activeEditor.text).toEqual("st Editor's text")
+  expect(app.clipboard).toEqual("Fir") 
+})
+
+test("the paste command", () => {
+  const copyCommand = new CopyCommand(app)
+  app.executeCommand(copyCommand)
+
+  app.setActiveEditor(editor2)
+  const pasteCommand = new PasteCommand(app)
+  app.executeCommand(pasteCommand)
+
+  expect(app.activeEditor.text).toEqual("Firond Editor's text")
+})
+
+test.skip("the undo command", () => {
+  const copyCommand = new CopyCommand(app)
+  const cutCommand = new CutCommand(app)
+  const pasteCommand = new PasteCommand(app)
+
+  expect(editor1.text).toEqual("First Editor's text")
+  expect(editor2.text).toEqual("Second Editor's text")
+
+  app.executeCommand(cutCommand)
+  expect(app.activeEditor.text).toEqual("st Editor's text")
+  expect(editor1.text).toEqual("st Editor's text")
+  expect(editor2.text).toEqual("Second Editor's text")
+
+  app.setActiveEditor(editor2)
+  app.executeCommand(pasteCommand)
+  expect(editor1.text).toEqual("st Editor's text")
+  expect(editor2.text).toEqual("Firond Editor's text")
+
+  app.setActiveEditor(editor1)
+  app.executeCommand(copyCommand)
+  expect(editor1.text).toEqual("st Editor's text")
+  expect(editor2.text).toEqual("Firond Editor's text")
+
+  app.setActiveEditor(editor2)
+  app.executeCommand(pasteCommand)
+  expect(editor1.text).toEqual("st Editor's text")
+  expect(editor2.text).toEqual("st ond Editor's text")
+
+  // sequence of "undo"s
+
+  const undoCommand = new UndoCommand(app)
+  app.executeCommand(undoCommand)
+  expect(editor1.text).toEqual("st Editor's text")
+  expect(editor2.text).toEqual("Firond Editor's text")
+
+  app.executeCommand(undoCommand)
+  expect(editor1.text).toEqual("st Editor's text")
+  expect(editor2.text).toEqual("Second Editor's text")
+
+  app.executeCommand(undoCommand)
+  expect(editor1.text).toEqual("First Editor's text")
+  expect(editor2.text).toEqual("Second Editor's text")
 })
 
   // createUI() {

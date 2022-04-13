@@ -1,32 +1,42 @@
 /// concrete-commands.ts
 
-import Command from "./command"
+import ACommand from "./command"
 
-export class CopyCommand extends Command {
+export class CopyCommand extends ACommand {
   execute(): boolean {
-    this._app.clipboard = this._editor.getSelection
+    if (this._app.activeEditor) {
+      this._app.clipboard = this._app.activeEditor.getSelection()
+    }
     return false
   }
 }
 
-export class CutCommand extends Command {
+export class CutCommand extends ACommand {
   execute(): boolean {
-    this.saveBackup()
-    this._app.clipboard = this._editor.getSelection
-    this._editor.deleteSelection()
-    return true
+    if (this._app.activeEditor) {
+      this.saveBackup()
+      this._app.clipboard = this._app.activeEditor.getSelection()
+      this._app.activeEditor.deleteSelection()
+      return true
+    } else {
+      return false
+    }
   }
 }
 
-export class PasteCommand extends Command {
+export class PasteCommand extends ACommand {
   execute(): boolean {
-    this.saveBackup()
-    this._editor.replaceSelection(this._app.clipboard)
-    return true
+    if (this._app.activeEditor) {
+      this.saveBackup()
+      this._app.activeEditor.replaceSelection(this._app.clipboard)
+      return true
+    } else {
+      return false
+    }
   }
 }
 
-export class UndoCommand extends Command {
+export class UndoCommand extends ACommand {
   execute(): boolean {
     this._app.undo()
     return false
