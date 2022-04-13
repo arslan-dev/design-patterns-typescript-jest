@@ -35,6 +35,7 @@ export interface IApplication {
 
   addEditor(editor: IControllableEditor): void
   get editors(): TEditorList
+  setActiveEditor(editor: IControllableEditor): void
 }
 
 export default class Application implements IControllableApplication, IApplication {
@@ -81,6 +82,7 @@ export default class Application implements IControllableApplication, IApplicati
 
   addEditor(editor: IControllableEditor): void {
     this._editors.push(editor)
+    this.setActiveEditor(editor)
   }
 
   get editors(): TEditorList {
@@ -92,6 +94,12 @@ export default class Application implements IControllableApplication, IApplicati
       return this._activeEditor
     } else {
       return null
+    }
+  }
+
+  setActiveEditor(editor: IControllableEditor): void {
+    if (this._editors.includes(editor)) {
+      this._activeEditor = editor
     }
   }
 

@@ -1,8 +1,10 @@
 // command.test.ts
 // Tests for the Command Design Pattern
 
-import { Command, CopyCommand, CutCommand, PasteCommand, UndoCommand } from "../../design-patterns/command-dp/command/command"
-import { Application } from "../../design-patterns/command-dp/application/application"
+import Application from "../../design-patterns/command-dp/application/application"
+import CommandHistory from "../../design-patterns/command-dp/application/components/command-history"
+import Button from "../../design-patterns/command-dp/application/components/button"
+import { CopyCommand } from "../../design-patterns/command-dp/command/concrete-commands"
 
 
 // TEST STARTS
@@ -16,7 +18,11 @@ import { Application } from "../../design-patterns/command-dp/application/applic
 
 // beforeEach(() => {
 
-//   copyButton = new Button
+//   const commandHistory = new CommandHistory()
+//   application = new Application(commandHistory)
+
+//   const copyCommand = new CopyCommand(application)
+//   copyButton = new Button()
 //   cutButton = new Button
 //   pasteButton = new Button
 //   undoButton = new Button

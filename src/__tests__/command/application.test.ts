@@ -39,12 +39,24 @@ it("should be possible to add shortcuts", () => {
   expect(application.shortcuts.size).toEqual(2)
 })
 
-it("should be possible to open new Editors in the Application", () => {
-  const editor1 = new Editor
+it("should be possible to open new Editors in the Application and change active editors", () => {
+  const editor1 = new Editor()
   application.addEditor(editor1)
   expect(application.editors.length).toEqual(1)
+  expect(application.activeEditor).toBe(editor1)
 
   const editor2 = new Editor
   application.addEditor(editor2)
   expect(application.editors.length).toEqual(2)
+  expect(application.activeEditor).toBe(editor2)
+
+  application.setActiveEditor(editor1)
+  expect(application.activeEditor).toBe(editor1)
+
+  application.setActiveEditor(editor2)
+  expect(application.activeEditor).toBe(editor2)
+
+  const editor3 = new Editor
+  application.setActiveEditor(editor3)
+  expect(application.activeEditor).not.toBe(editor3)
 })

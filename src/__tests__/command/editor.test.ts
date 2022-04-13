@@ -7,7 +7,7 @@ import { IControllableEditor } from "../../design-patterns/command-dp/command/co
 let editor: IControllableEditor
 
 beforeEach(() => {
-  editor = new Editor
+  editor = new Editor()
   editor.text = "Test Text"
 })
 
