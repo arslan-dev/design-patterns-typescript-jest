@@ -20,7 +20,7 @@ interface ComponentWithContextualHelp {
 abstract class Component implements ComponentWithContextualHelp {
   tooltipText?: string
 
-  container?: Container;
+  container?: Container
 
   showHelp(screen: IScreen): void {
     if (this.tooltipText) {
@@ -37,8 +37,8 @@ abstract class Container extends Component {
   protected _children: Component[] = []
 
   add(child: Component): void {
-    this._children.push(child);
-    child.container = this;
+    this._children.push(child)
+    child.container = this
   }
 }
 
