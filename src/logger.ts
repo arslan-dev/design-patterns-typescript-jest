@@ -3,9 +3,13 @@
 
 type TRecord = string[]
 
+interface ISerializable {
+  toString(): string
+}
+
 export default class Logger {
-  static info(str: string) {
-    InnerLogger.instance.info(str)
+  static info(v: ISerializable) {
+    InnerLogger.instance.info(v)
   }
 
   static get records(): TRecord {
@@ -14,6 +18,10 @@ export default class Logger {
 
   static clear() {
     InnerLogger.instance.clear()
+  }
+
+  static get lastEntry(): string | null {
+    return InnerLogger.instance.lastEntry
   }
 }
 
@@ -36,11 +44,19 @@ class InnerLogger {
     this._records = []
   }
 
-  info(str: string) {
-    this._records.push(str)
+  info(str: ISerializable) {
+    this._records.push(str.toString())
   }
 
   clear() {
     this._records = []
+  }
+
+  get lastEntry(): string | null {
+    if (this._records.length) {
+      return this._records[this._records.length-1]
+    } else {
+      return null
+    }
   }
 }

@@ -1,4 +1,6 @@
-class TreeType {
+import Logger from "../Logger"
+
+export class TreeType {
   private _name: string
   private _color: string
   private _texture: string
@@ -14,11 +16,11 @@ class TreeType {
   }
 
   draw(canvas: string, x: number, y: number) {
-    console.log(`Draw on a ${canvas} at the coordinates (${x},${y});`)
+    Logger.info(`Draw on a ${canvas} at the coordinates (${x},${y}), name: ${this._name}, color: ${this._color}, texture: ${this._texture};`)
   }
 }
 
-class TreeFactory {
+export class TreeFactory {
   static treeTypes: TreeType[] = []
 
   static getTreeType(name: string, color: string, texture: string): TreeType {
@@ -35,11 +37,11 @@ class TreeFactory {
   }
 
   static displayAllCreatedTreeTypes() {
-    this.treeTypes.forEach(treeType => console.log(treeType))
+    this.treeTypes.forEach(treeType => Logger.info(treeType))
   }
 }
 
-class Tree {
+export class Tree {
   x: number
   y: number
   treeType: TreeType
@@ -55,7 +57,7 @@ class Tree {
   }
 }
 
-class Forest {
+export class Forest {
   trees: Tree[] = []
 
   plantTree(
@@ -76,20 +78,3 @@ class Forest {
     })
   }
 }
-
-const forest = new Forest
-forest.plantTree(10, 10, 'tree1', 'red', 'tree1.png')
-forest.plantTree(10, 20, 'tree1', 'red', 'tree1.png')
-forest.plantTree(20, 20, 'tree2', 'brown', 'tree2.png')
-
-for(let i=0; i<5; i++) {
-  forest.plantTree(10*i, 30, 'tree1', 'blue', 'tree1.png')
-}
-
-for(let i=0; i<5; i++) {
-  forest.plantTree(20*i, 40, 'tree2', 'brown', 'tree2.png')
-}
-
-forest.draw('canvas01')
-
-TreeFactory.displayAllCreatedTreeTypes()
