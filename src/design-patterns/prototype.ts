@@ -1,92 +1,92 @@
-abstract class Shape {
+// abstract class Shape<Type> {
+//   // abstract clone(): Shape
+//   static abstract constructFromPrototype(prototype: Type): Type
+// }
 
-  constructor() {}
+// class BaseShape extends Shape {
+//   x: number
+//   y: number
+//   color: string
 
-  // constructor(source: Shape) {
-  //   this.x = source.x;
-  //   this.y = source.y;
-  //   this.color = source.color;
-  // }
+//   protected override copyFieldsInto(clonedShape: BaseShape): BaseShape {
+//     clonedShape.x = this.x;
+//     clonedShape.y = this.y;
+//     clonedShape.color = this.color;
+//     return clonedShape;
+//   }
 
-  protected abstract copyFieldsInto(clonedShape: Shape): Shape
-
-  abstract clone(): Shape
+//   override clone(): BaseShape {
+//     let clonedShape = new BaseShape;
+//     clonedShape = this.copyFieldsInto(clonedShape);
+//     return clonedShape;
+//   }
+// }
+interface ICloneable {
+  clone(): ICloneable
 }
 
-class BaseShape extends Shape {
-  x: number
-  y: number
-  color: string
+class Shape implements ICloneable {
+  protected _x?: number
+  protected _y?: number
+  get x(): number | undefined { return this._x }
+  get y(): number | undefined { return this._y }
 
-  protected override copyFieldsInto(clonedShape: BaseShape): BaseShape {
-    clonedShape.x = this.x;
-    clonedShape.y = this.y;
-    clonedShape.color = this.color;
-    return clonedShape;
+  static constructTrivially(x: number, y: number): Shape {
+    const shape = new Shape
+    shape._x = x
+    shape._y = y
+    return shape
   }
 
-  override clone(): BaseShape {
-    let clonedShape = new BaseShape;
-    clonedShape = this.copyFieldsInto(clonedShape);
-    return clonedShape;
+  static constructFromPrototype(prototype: Shape): Shape {
+    const shape = new Shape
+    shape._x = prototype.x
+    shape._y = prototype.y
+    return shape
   }
-}
 
-class Rectangle extends BaseShape {
-  width: number
-  height: number
-
-  // constructor(source: Rectangle) {
-  //   super(source);
-  //   this.width = source.width;
-  //   this.height = source.height;
-  // }
-
-  protected override copyFieldsInto(clonedShape: Rectangle): Rectangle {
-    clonedShape = super.copyFieldsInto(clonedShape);
-    clonedShape.width = this.width;
-    clonedShape.height = this.height;
-  }
-}
-
-class Circle extends Shape {
-  radius: number
-
-  // constructor(source: Circle) {
-  //   super(source);
-  //   this.radius = source.radius;
-  // }
-
-  override clone(): Shape {
-    return new Circle(this)
+  clone(): Shape {
+    return Shape.constructFromPrototype(this)    
   }
 }
 
-const shapes: Array<Shape> = [];
 
-const circle = Object.create(Circle.prototype);
-circle.x = 10
-circle.y = 10
-circle.radius = 20
-shapes.push(circle);
+export class Rectangle extends Shape {
+  protected _width?: number
+  protected _height?: number
 
-const anotherCircle = circle.clone();
-shapes.push(anotherCircle);
+  get width(): number | undefined { return this._width }
+  get height(): number | undefined { return this._height }
 
-const rectangle = Object.create(Rectangle.prototype);
-rectangle.width = 10
-rectangle.height = 20
-shapes.push(rectangle);
+  static constructTrivially(x: number, y: number, width: number, height: number): Rectangle {
+    const rectangle = super.constructTrivially(x, y)
+    const rectangle = new Rectangle
+    rectangle._width = width
+    rectangle._height = height
+    return rectangle
+  }
 
-console.log(shapes);
+  static constructFromPrototype(prototype: Rectangle): Rectangle {
+    const rectangle = new Rectangle
+    rectangle._width = prototype.width
+    rectangle._height = prototype.height
+    return rectangle
+  }
 
-// COPY
+  clone(): Rectangle {
+    return Rectangle.constructFromPrototype(this)    
+  }
+}
 
-const shapesCopy: Shape[] = [];
+// class Circle extends Shape {
+//   radius: number
 
-shapes.forEach(shape => {
-  const clone = shape.clone();
-  shapesCopy.push( clone )
-});
+//   // constructor(source: Circle) {
+//   //   super(source);
+//   //   this.radius = source.radius;
+//   // }
 
-console.log(shapesCopy);
+//   override clone(): Shape {
+//     return new Circle(this)
+//   }
+// }
