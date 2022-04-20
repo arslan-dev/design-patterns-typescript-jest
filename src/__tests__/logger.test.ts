@@ -42,3 +42,36 @@ test("last entry of an empty Logger records should be null", () => {
   const lastEntry = Logger.lastEntry
   expect(lastEntry).toBeNull()
 })
+
+test("logger iterator", () => {
+  Logger.clear()
+  
+  Logger.info("log1")
+  Logger.info("log2")
+  Logger.info("log3")
+
+  const iterator = Logger.getIterator()
+
+  expect(iterator.hasMore()).toEqual(true)
+  expect(iterator.next).toEqual("log1")
+  expect(iterator.next).toEqual("log2")
+  expect(iterator.next).toEqual("log3")
+  expect(iterator.hasMore()).toEqual(false)
+})
+
+test("new iterator should start from the start", () => {
+  Logger.clear()
+
+  Logger.info("log1")
+  let iterator = Logger.getIterator()
+
+  expect(iterator.hasMore()).toEqual(true)
+  expect(iterator.next).toEqual("log1")
+  expect(iterator.hasMore()).toEqual(false)
+
+  iterator = Logger.getIterator()
+
+  expect(iterator.hasMore()).toEqual(true)
+  expect(iterator.next).toEqual("log1")
+  expect(iterator.hasMore()).toEqual(false)
+})

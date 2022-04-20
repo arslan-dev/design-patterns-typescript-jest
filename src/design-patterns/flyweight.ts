@@ -1,4 +1,4 @@
-import Logger from "../Logger"
+import Logger from "../logger"
 
 export class TreeType {
   private _name: string

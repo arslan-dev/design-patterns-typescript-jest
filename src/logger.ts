@@ -1,6 +1,8 @@
 /// logger.ts
 /// simple Logger
 
+import IIterator from "./i-iterator"
+
 type TRecord = string[]
 
 interface ISerializable {
@@ -23,9 +25,13 @@ export default class Logger {
   static get lastEntry(): string | null {
     return InnerLogger.instance.lastEntry
   }
+
+  static getIterator(): IIterator<string> {
+    return InnerLogger.instance.getIterator()
+  }
 }
 
-class InnerLogger {
+class InnerLogger implements IIterator<string> {
   private static _instance: InnerLogger
 
   static get instance(): InnerLogger {
@@ -42,6 +48,7 @@ class InnerLogger {
 
   private constructor() {
     this._records = []
+    this._curPos = -1
   }
 
   info(str: ISerializable) {
@@ -58,5 +65,31 @@ class InnerLogger {
     } else {
       return null
     }
+  }
+
+  getIterator(): IIterator<string> {
+    this.resetCurPos()
+    return this
+  }
+
+  // IIterator implementation
+
+  protected _curPos: number
+
+  protected resetCurPos() {
+    this._curPos = -1
+  }
+
+  get next(): string | undefined {
+    if (this.hasMore()) {
+      this._curPos++
+      return this._records[this._curPos]
+    } else {
+      return undefined
+    }
+  }  
+
+  hasMore(): boolean {
+    return this._curPos < this._records.length-1
   }
 }
