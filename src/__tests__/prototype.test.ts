@@ -1,8 +1,8 @@
 /// prototype.test.ts
 /// Tests for the Prototype DP implementation
 
-import { Prototype, ComponentWithBackReference } from "../design-patterns/prototype3"
-import { Rectangle } from "../design-patterns/prototype"
+import { Prototype, ComponentWithBackReference } from "../design-patterns/prototype-dp/prototype3"
+import { Rectangle } from "../design-patterns/prototype-dp/prototype"
 
 test("dates should be equal", () => {
   const date1 = new Date()
