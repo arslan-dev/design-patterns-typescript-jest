@@ -21,8 +21,8 @@
 //     return clonedShape;
 //   }
 // }
-interface ICloneable {
-  clone(): ICloneable
+interface ICloneable<Type> {
+  clone(): Type
 }
 
 class Shape implements ICloneable {
@@ -51,30 +51,33 @@ class Shape implements ICloneable {
 }
 
 
-export class Rectangle extends Shape {
-  protected _width?: number
-  protected _height?: number
+export class Rectangle {
+  width?: number
+  height?: number
 
-  get width(): number | undefined { return this._width }
-  get height(): number | undefined { return this._height }
-
-  static constructTrivially(x: number, y: number, width: number, height: number): Rectangle {
-    const rectangle = super.constructTrivially(x, y)
-    const rectangle = new Rectangle
-    rectangle._width = width
-    rectangle._height = height
-    return rectangle
+  constructor(prototype: Rectangle) {
+    this.width = prototype.width
+    this.height = prototype.height
   }
 
-  static constructFromPrototype(prototype: Rectangle): Rectangle {
-    const rectangle = new Rectangle
-    rectangle._width = prototype.width
-    rectangle._height = prototype.height
-    return rectangle
-  }
+  // static constructTrivially(x: number, y: number, width: number, height: number): Rectangle {
+  //   const rectangle = super.constructTrivially(x, y)
+  //   const rectangle = new Rectangle
+  //   rectangle._width = width
+  //   rectangle._height = height
+  //   return rectangle
+  // }
+
+  // static constructFromPrototype(prototype: Rectangle): Rectangle {
+  //   const rectangle = new Rectangle
+  //   rectangle._width = prototype.width
+  //   rectangle._height = prototype.height
+  //   return rectangle
+  // }
 
   clone(): Rectangle {
-    return Rectangle.constructFromPrototype(this)    
+    return Object.assign({}, this)
+    // return Rectangle.constructFromPrototype(this)    
   }
 }
 
