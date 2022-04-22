@@ -1,10 +1,10 @@
 // command.test.ts
 // Tests for the Command Design Pattern
 
-import Application from "../../design-patterns/command-dp/application/application"
-import CommandHistory from "../../design-patterns/command-dp/application/components/command-history"
-import { CopyCommand, CutCommand, PasteCommand, UndoCommand } from "../../design-patterns/command-dp/command/concrete-commands"
-import Editor from "../../design-patterns/command-dp/application/components/editor"
+import Application from "../../design-patterns/command-and-memento-dp/application/application"
+import CommandHistory from "../../design-patterns/command-and-memento-dp/application/components/command-history"
+import { CopyCommand, CutCommand, PasteCommand, UndoCommand } from "../../design-patterns/command-and-memento-dp/command/concrete-commands"
+import Editor from "../../design-patterns/command-and-memento-dp/application/components/editor"
 
 
 // TEST STARTS
@@ -67,7 +67,7 @@ test("the paste command", () => {
   expect(app.activeEditor.text).toEqual("Firond Editor's text")
 })
 
-test.skip("the undo command", () => {
+test("the undo command", () => {
   const copyCommand = new CopyCommand(app)
   const cutCommand = new CutCommand(app)
   const pasteCommand = new PasteCommand(app)
@@ -110,33 +110,3 @@ test.skip("the undo command", () => {
   expect(editor1.text).toEqual("First Editor's text")
   expect(editor2.text).toEqual("Second Editor's text")
 })
-
-  // createUI() {
-  //   const copyCommand = new CopyCommand(this, this.activeEditor)
-  //   const copy = () => this.executeCommand(copyCommand)
-
-  //   const cutCommand = new CutCommand(this, this.activeEditor)
-  //   const cut = () => this.executeCommand(cutCommand)
-
-  //   const pasteCommand = new PasteCommand(this, this.activeEditor)
-  //   const paste = () => this.executeCommand(pasteCommand)
-
-  //   const undoCommand = new UndoCommand(this, this.activeEditor)
-  //   const undo = () => this.executeCommand(undoCommand)
-
-  //   // EXECUTION
-
-  //   copy()
-  //   console.log('')
-  //   cut()
-  //   console.log('')
-  //   paste()
-  //   console.log('')
-  //   undo()
-  // }
-
-  // executeCommand(command: Command) {
-  //   if (command.execute()) {
-  //     this._history.push(command)
-  //   }
-  // }

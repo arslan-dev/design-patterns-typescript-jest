@@ -1,8 +1,8 @@
 /// editor.test.ts
 /// for simplicity all selections are in (0, 3) range
 
-import Editor from "../../design-patterns/command-dp/application/components/editor"
-import { IControllableEditor } from "../../design-patterns/command-dp/command/command"
+import Editor from "../../design-patterns/command-and-memento-dp/application/components/editor"
+import { IControllableEditor } from "../../design-patterns/command-and-memento-dp/command/command"
 
 let editor: IControllableEditor
 

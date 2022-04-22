@@ -14,7 +14,7 @@ export default class Button implements IButton {
     this._command = this.command
   }
 
-  press(): boolean {
+  press(): void {
     return this._command.execute()
   }
 }

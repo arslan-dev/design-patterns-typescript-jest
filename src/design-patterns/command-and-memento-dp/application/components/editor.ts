@@ -1,6 +1,7 @@
 /// editor.ts
 
 import { IControllableEditor } from "../../command/command"
+import Snapshot from "./snapshot"
 
 export default class Editor implements IControllableEditor {
   protected _text: string
@@ -9,6 +10,10 @@ export default class Editor implements IControllableEditor {
 
   constructor() {
     this._text = ""
+  }
+
+  createSnapshot(): Snapshot {
+    return new Snapshot(this, this._text)
   }
 
   getSelection(): string {

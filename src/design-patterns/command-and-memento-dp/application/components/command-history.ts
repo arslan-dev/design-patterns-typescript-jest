@@ -1,10 +1,10 @@
 // command-history.ts
 
 import { ICommandHistory } from "../application"
-import ACommand from "../../command/command"
+import Snapshot from "./snapshot"
 
 export default class CommandHistory implements ICommandHistory {
-  private _history: ACommand[]
+  private _history: Snapshot[]
 
   constructor() {
     this._history = []
@@ -12,11 +12,11 @@ export default class CommandHistory implements ICommandHistory {
 
   // ICommandHistory interface implementation
 
-  push(command: ACommand) {
+  push(command: Snapshot) {
     this._history.push(command)
   }
 
-  pop(): ACommand | undefined {
+  pop(): Snapshot | undefined {
     return this._history.pop()
   }
 }

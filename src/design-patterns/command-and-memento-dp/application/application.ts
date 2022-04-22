@@ -5,10 +5,11 @@
 
 import ACommand, { IControllableApplication, IControllableEditor } from "../command/command"
 import { ShortcutManager } from "./components/shortcut-manager"
+import Snapshot from "./components/snapshot"
 
 export interface ICommandHistory {
-  push(command: ACommand): void
-  pop(): ACommand | undefined
+  push(command: Snapshot): void
+  pop(): Snapshot | undefined
 }
 
 export interface IButton {
@@ -31,7 +32,8 @@ export interface IApplication {
   get buttons(): TButtonList
 
   addShortcut(key: string, command: ACommand): void
-  get shortcuts(): TShortcutMap
+  get shortcutManager(): IShortcutManager
+  pressKey(key: string): void
 
   addEditor(editor: IControllableEditor): void
   get editors(): TEditorList
@@ -78,8 +80,12 @@ export default class Application implements IControllableApplication, IApplicati
     this._shortcutManager.onKeyPress(key, command)    
   }
 
-  get shortcuts(): TShortcutMap {
-    return this._shortcutManager.shortcutMap 
+  get shortcutManager(): IShortcutManager {
+    return this._shortcutManager
+  }
+
+  pressKey(key: string): void {
+    this.shortcutManager.pressKey(key)
   }
 
   addEditor(editor: IControllableEditor): void {
@@ -91,12 +97,8 @@ export default class Application implements IControllableApplication, IApplicati
     return this._editors  
   }
 
-  get activeEditor(): IControllableEditor | null {
-    if (this._activeEditor) {
-      return this._activeEditor
-    } else {
-      return null
-    }
+  get activeEditor(): IControllableEditor | undefined {
+    return this._activeEditor
   }
 
   setActiveEditor(editor: IControllableEditor): void {
@@ -106,15 +108,18 @@ export default class Application implements IControllableApplication, IApplicati
   }
 
   executeCommand(command: ACommand): void {
-    if (command.execute()) {
-      this._commandHistory.push(command)
-    }
+    command.execute()
+  }
+
+  saveSnapshot(editor: IControllableEditor): void {
+    const snapshot = editor.createSnapshot()
+    this._commandHistory.push(snapshot)
   }
 
   undo() {
-    const command = this._commandHistory.pop()
-    if (command) {
-      command.undo()
+    const snapshot = this._commandHistory.pop()
+    if (snapshot) {
+      snapshot.restore()
     }
   }
 }
