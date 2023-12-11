@@ -1,5 +1,13 @@
-/// proxy.test.ts
-/// Tests for the Proxy DP implementation
+///
+/// proxy-v1.0.spec.ts - tests for the Proxy DP implementation
+///
+/// NOTICE: from 10dec2023:
+///   This specs are for historical reasons only
+///   proxy-v2.0.spec.ts supersedes this file
+///
+/// AUTHOR: Arslan Dev, arslan.dev@gmail.com
+///
+
 
 import { ThirdPartyYouTubeClass, IThirdPartyYouTubeLib, CachedYouTubeClass, YouTubeManager } from "./proxy-v1.0"
 import Logger from "../../logger"

@@ -1,5 +1,20 @@
 {
+  "cSpell.words": [
+    "arslan"
+  ],
   "files.exclude": {
     "**/node_modules/": true
-  }
+  },
+  "todohighlight.keywords": [
+    {
+      "text": "NOTICE:",
+      "color": "black",
+      "backgroundColor": "#FF5240",
+    },
+    {
+      "text": "TODO:",
+      "color": "black",
+      "backgroundColor": "yellow",
+    }
+  ]
 }

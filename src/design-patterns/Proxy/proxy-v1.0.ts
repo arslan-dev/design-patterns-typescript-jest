@@ -1,5 +1,12 @@
-/// proxy.ts 
-/// Structural design pattern implementation
+///
+/// proxy-v1.0.ts - Proxy DP implementation
+///
+/// NOTICE: from 10dec2023:
+///   This module is for historical reasons only
+///   proxy-v2.0.ts supersedes this file
+///
+/// AUTHOR: Arslan Dev, arslan.dev@gmail.com
+///
 
 import Logger from "../../logger"
 

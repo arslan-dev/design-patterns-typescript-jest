@@ -1,7 +1,12 @@
-/**
- * This specs are for historical reasons only
- * adapter-v2.0.test.ts supersedes this specs
- */
+///
+/// adapter-v1.0.spec.ts - tests for the Adapter DP implementation
+///
+/// NOTICE: from 10dec2023
+///   This specs are for historical reasons only
+///   adapter-v2.0.spec.ts supersedes this file
+///
+/// AUTHOR: Arslan Dev, arslan.dev@gmail.com
+///
 
 import { RoundHole, RoundPeg, SquarePeg, makeSquarePegAdapter } from "./adapter-v1.0"
 
