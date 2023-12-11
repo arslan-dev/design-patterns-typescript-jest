@@ -1,3 +1,7 @@
+///
+/// adapter-v2.0.ts - Adapter DP implementation
+/// AUTHOR: Arslan Dev, arslan.dev@gmail.com
+///
 
 abstract class RoundPegBase {
   abstract get diameter(): number

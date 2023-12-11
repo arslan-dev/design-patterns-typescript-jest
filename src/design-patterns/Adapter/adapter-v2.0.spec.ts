@@ -1,3 +1,8 @@
+///
+/// adapter-v2.0.spec.ts - tests for the Adapter DP implementation
+/// AUTHOR: Arslan Dev, arslan.dev@gmail.com
+///
+
 import { RoundPeg, RoundOpening, SquarePeg, SquareToRoundAdapter } from "./adapter-v2.0"
 
 describe("Adapter DP", () => {

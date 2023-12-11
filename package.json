@@ -1,7 +1,7 @@
 {
-  "name": "jest-playground",
-  "version": "1.0.0",
-  "description": "",
+  "name": "design-patterns-typescript-jest",
+  "version": "1.2.0-proxy",
+  "description": "Studying design patterns using TypeScript and Jest",
   "scripts": {
     "test": "jest --watch",
     "lint": "eslint . --ext .ts"

@@ -1,7 +1,12 @@
-/**
- * This module is for historical reasons only
- * adapter-v2.0 supersedes this module
- */
+///
+/// adapter-v1.0.ts - Adapter DP implementation
+///
+/// NOTICE: from 10dec2023:
+///   This module is for historical reasons only
+///   adapter-v2.0.ts supersedes this file
+///
+/// AUTHOR: Arslan Dev, arslan.dev@gmail.com
+///
 
 // TODO: try with js proxy
 
