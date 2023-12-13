@@ -1,7 +1,7 @@
 /// mediator.ts
 /// Mediator DP implementation
 
-import Logger from "../logger"
+import Logger from "../Logger"
 
 enum EEventType {
   Click,

@@ -1,7 +1,7 @@
 /// flyweight.test.ts
 /// Tests for the Flyweight DP
 
-import Logger from "../logger"
+import Logger from "../Logger"
 import { Tree, TreeType, Forest, TreeFactory } from "../design-patterns/flyweight"
 
 beforeEach(() => {

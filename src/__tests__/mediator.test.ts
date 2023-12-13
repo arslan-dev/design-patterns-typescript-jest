@@ -2,7 +2,7 @@
 /// tests for the Mediator DP implementation
 
 import { AuthenticationDialog, AuthenticationDialogBuilder } from "../design-patterns/mediator"
-import Logger from "../logger"
+import Logger from "../Logger"
 
 beforeEach(() => {
   Logger.clear()

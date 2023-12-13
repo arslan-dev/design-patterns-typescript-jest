@@ -1,7 +1,7 @@
 /// observer.ts
 /// Observer DP implementation
 
-import Logger from "../logger"
+import Logger from "../Logger"
 
 enum EEventType {
   Open,

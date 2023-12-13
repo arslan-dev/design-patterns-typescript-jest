@@ -1,4 +1,4 @@
-/// logger.ts
+/// Logger.ts
 /// simple Logger
 
 import IIterator from "./i-iterator"

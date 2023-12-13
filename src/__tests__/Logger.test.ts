@@ -1,7 +1,7 @@
-/// logger.test.ts
+/// Logger.test.ts
 /// Tests for the simple Logger
 
-import Logger from "../logger"
+import Logger from "../Logger"
 
 test("Logger should log", () => {
   Logger.clear()

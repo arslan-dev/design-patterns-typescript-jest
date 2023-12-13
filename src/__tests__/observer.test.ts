@@ -2,7 +2,7 @@
 /// Tests for the Observer DP implementation
 
 import { EEventType, Editor, LoggerListener, EmailAlertsListener } from "../design-patterns/observer"
-import Logger from "../logger"
+import Logger from "../Logger"
 
 test("observer", () => {
   const editor = new Editor

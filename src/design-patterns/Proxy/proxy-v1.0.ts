@@ -8,7 +8,7 @@
 /// AUTHOR: Arslan Dev, arslan.dev@gmail.com
 ///
 
-import Logger from "../../logger"
+import Logger from "../../Logger"
 
 type TVideoInfo = {
   id: number

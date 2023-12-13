@@ -10,7 +10,7 @@
 
 
 import { ThirdPartyYouTubeClass, IThirdPartyYouTubeLib, CachedYouTubeClass, YouTubeManager } from "./proxy-v1.0"
-import Logger from "../../logger"
+import Logger from "../../Logger"
 
 beforeEach(() => {
   Logger.clear()

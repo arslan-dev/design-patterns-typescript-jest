@@ -2,7 +2,7 @@
 /// Tests for the Decorator DP implementation
 
 import { DataSource, FileDataSource, CompressionDecorator, EncryptionDecorator } from "../design-patterns/decorator"
-import Logger from "../logger"
+import Logger from "../Logger"
 
 const salaryRecords = "salaryRecords"  
 
