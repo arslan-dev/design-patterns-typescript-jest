@@ -1,6 +1,6 @@
 // decorator.ts
 
-import Logger from "../Logger"
+import Logger from "../logger"
 export interface DataSource {
   writeData(data: string): void
   readData(): string
